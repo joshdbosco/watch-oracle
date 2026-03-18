@@ -70,7 +70,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from:    process.env.RESEND_FROM_EMAIL!,
       to:      process.env.RESEND_TO_EMAIL!,
-      replyTo: safeEmail,
+      reply_to: safeEmail,
       subject: `New Oracle request — ${budgetLabel}${safeName ? ` from ${safeName}` : ''}`,
       html: `
         <h2 style="font-family:Georgia,serif;margin-bottom:16px">New Watch Oracle submission</h2>
