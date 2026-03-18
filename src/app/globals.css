@@ -1,56 +1,73 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/*
+  Watch Oracle — Global Styles
+  Swiss editorial: Fraunces serif + Syne Mono labels + rust accent
+*/
 
 :root {
-  --gold:    #B8976A;
-  --gold-lt: #D4B896;
-  --deep:    #0D0B09;
-  --surface: #161310;
-  --hover:   #1E1B16;
-  --border:  #2E2820;
-  --muted:   #7A6E58;
-  --text:    #EDE4D3;
-  --sub:     #B0A48A;
+  --ink:      #131210;
+  --paper:    #f3efe8;
+  --surface:  #ece8e0;
+  --rule:     #d0ccc2;
+  --rust:     #c0402a;
+  --rust2:    #d9604a;
+  --muted:    #8a8278;
+  --mid:      #5a564f;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-ui:      var(--font-syne), system-ui, sans-serif;
+  --font-mono:    var(--font-syne-mono), 'Courier New', monospace;
 }
 
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
 
 body {
-  background: var(--deep);
-  color: var(--text);
-  font-family: var(--font-garamond), Georgia, serif;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Warm background glow */
-body::before {
+/* subtle grid texture — Swiss grid feeling */
+body::after {
   content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 60% 50% at 20% 30%,
-    rgba(184,151,106,.035) 0%,
-    transparent 70%
-  );
+  background-image:
+    linear-gradient(rgba(0,0,0,.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,0,0,.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+}
+
+/* all content sits above the texture */
+#__next, main {
+  position: relative;
+  z-index: 1;
 }
 
 @keyframes rise {
-  from { opacity: 0; transform: translateY(18px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px) }
+  to   { opacity: 1; transform: translateY(0) }
 }
 
-@keyframes rot   { to { transform: rotate(360deg); } }
-@keyframes spin  { to { transform: rotate(360deg); } }
-@keyframes spinr { to { transform: rotate(-360deg); } }
-@keyframes pop   {
-  from { transform: scale(.3); opacity: 0; }
-  to   { transform: scale(1);  opacity: 1; }
+@keyframes pop {
+  from { transform: scale(.2); opacity: 0 }
+  to   { transform: scale(1);  opacity: 1 }
 }
 
-.animate-rise { animation: rise .5s cubic-bezier(.16,1,.3,1) both; }
+@keyframes spin {
+  to { transform: rotate(360deg) }
+}
