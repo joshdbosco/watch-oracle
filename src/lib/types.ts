@@ -13,16 +13,16 @@ export interface Watch {
 
 // ── Quiz types ─────────────────────────────────────────────────────────────
 export interface QuizOption {
-  ico: string
-  m:   string   // label
-  t:   string[] // tags this option adds
+  icon:  string
+  label: string
+  tags:  string[]
 }
 
 export interface QuizQuestion {
   ctx:  string        // kicker label e.g. "The one that changes everything"
   h:    string        // question heading
   note: string        // sub-note
-  o:    QuizOption[]  // answer options
+  opts: QuizOption[]  // answer options
 }
 
 // ── Submission type ────────────────────────────────────────────────────────
