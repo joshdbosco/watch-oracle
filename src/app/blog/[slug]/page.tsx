@@ -12,9 +12,19 @@ import { getBlogPostBySlug, getAllBlogPosts } from '@/lib/notion'
 
 export const revalidate = 3600
 
+// Slugs not pre-generated are rendered on demand — prevents build crash if Notion is slow
+export const dynamicParams = true
+
 export async function generateStaticParams() {
-  const posts = await getAllBlogPosts()
-  return posts.map(p => ({ slug: p.slug }))
+  try {
+    const posts = await getAllBlogPosts()
+    return posts
+      .filter(p => p.slug && p.slug.trim() !== '')
+      .map(p => ({ slug: p.slug }))
+  } catch (err) {
+    console.error('generateStaticParams: Notion unreachable at build time', err)
+    return []
+  }
 }
 
 export async function generateMetadata(

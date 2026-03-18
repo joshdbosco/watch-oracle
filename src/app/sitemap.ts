@@ -6,7 +6,12 @@ import { MetadataRoute } from 'next'
 import { getAllBlogPosts } from '@/lib/notion'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const posts = await getAllBlogPosts()
+  let posts: Awaited<ReturnType<typeof getAllBlogPosts>> = []
+  try {
+    posts = await getAllBlogPosts()
+  } catch (err) {
+    console.error('sitemap: failed to fetch blog posts', err)
+  }
 
   const blogEntries = posts.map(post => ({
     url: `https://thewatchoracle.com/blog/${post.slug}`,

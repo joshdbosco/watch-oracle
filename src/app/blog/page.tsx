@@ -15,7 +15,12 @@ export const metadata: Metadata = {
 }
 
 export default async function BlogIndex() {
-  const posts = await getAllBlogPosts()
+  let posts: Awaited<ReturnType<typeof getAllBlogPosts>> = []
+  try {
+    posts = await getAllBlogPosts()
+  } catch (err) {
+    console.error('BlogIndex: failed to fetch posts', err)
+  }
 
   return (
     <main style={{ maxWidth: 600, margin: '0 auto', padding: '0 40px 120px', position: 'relative', zIndex: 1 }}>
