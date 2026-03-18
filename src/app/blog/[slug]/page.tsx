@@ -44,7 +44,8 @@ export async function generateMetadata(
 }
 
 // Extract FAQ pairs from HTML body — finds <h2>Frequently asked questions</h2>
-// and the <p> tags that follow in Q/A pairs
+// and the <p> tags that follow in Q/A pairs.
+// Uses split instead of regex s-flag (dotAll) for ES2015 compatibility.
 function extractFAQs(html: string): { q: string; a: string }[] {
   const faqs: { q: string; a: string }[] = []
 
@@ -54,25 +55,27 @@ function extractFAQs(html: string): { q: string; a: string }[] {
 
   const faqSection = html.slice(faqIdx)
 
-  // Match <strong>Question?</strong> ... paragraph patterns
+  // Extract questions from <strong>Question?</strong> patterns
   const strongRegex = /<strong>([^<]+\?)<\/strong>/g
-  const pRegex = /<p>(.*?)<\/p>/gs
-
   const questions: string[] = []
   let match
   while ((match = strongRegex.exec(faqSection)) !== null) {
     questions.push(match[1])
   }
 
+  // Extract paragraphs by splitting on <p> tags — avoids s-flag
   const paragraphs: string[] = []
-  while ((match = pRegex.exec(faqSection)) !== null) {
-    const text = match[1].replace(/<[^>]+>/g, '').trim()
+  const parts = faqSection.split('<p>')
+  for (let i = 1; i < parts.length; i++) {
+    const closeIdx = parts[i].indexOf('</p>')
+    if (closeIdx === -1) continue
+    const text = parts[i].slice(0, closeIdx).replace(/<[^>]+>/g, '').trim()
     if (text && !text.toLowerCase().includes('frequently')) {
       paragraphs.push(text)
     }
   }
 
-  // Pair them up
+  // Pair questions with answers
   questions.forEach((q, i) => {
     if (paragraphs[i]) {
       faqs.push({ q, a: paragraphs[i] })
