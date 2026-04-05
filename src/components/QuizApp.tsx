@@ -141,12 +141,12 @@ export function QuizApp({ watches }: Props) {
             <Clock />
             <div className="eyebrow" style={{ marginBottom: 32 }}>The Watch Oracle</div>
             <h1 style={{ fontSize: 'clamp(42px,7.5vw,68px)', fontWeight: 400, lineHeight: 1.05, letterSpacing: '-.02em', marginBottom: 32 }}>
-              You have no idea<br />what to buy <em style={{ fontStyle: 'italic', color: 'var(--rust2)' }}>them.</em>
+              Looking to gift a watch<br />but don&apos;t know <em style={{ fontStyle: 'italic', color: 'var(--rust2)' }}>where to start?</em>
             </h1>
             <p style={{ fontSize: 22, fontStyle: 'italic', color: 'var(--muted)', lineHeight: 1.7, marginBottom: 64 }}>
-              Seven questions. No watch knowledge needed.
+              Take the quiz for a personalised recommendation based on your answers.
             </p>
-            <OracleButton onClick={startQuiz}>Let&apos;s find it →</OracleButton>
+            <OracleButton onClick={startQuiz}>Take the quiz →</OracleButton>
           </div>
         )}
 
@@ -219,10 +219,10 @@ export function QuizApp({ watches }: Props) {
           <div style={{ paddingTop: 96, animation: 'rise .42s cubic-bezier(.16,1,.3,1) both' }}>
             <div className="eyebrow" style={{ marginBottom: 16 }}>Personal recommendation</div>
             <h2 style={{ fontSize: 'clamp(28px,5vw,44px)', fontWeight: 400, lineHeight: 1.15, marginBottom: 12 }}>
-              Tell us about <em style={{ fontStyle: 'italic', color: 'var(--rust2)' }}>them.</em>
+              That&apos;s a <em style={{ fontStyle: 'italic', color: 'var(--rust2)' }}>serious</em> budget.
             </h2>
             <p style={{ fontSize: 18, fontStyle: 'italic', color: 'var(--muted)', marginBottom: 48, lineHeight: 1.65 }}>
-              You&apos;ve done the hard part. This just helps us go deeper.
+              Tell us about them. A real person, not an algorithm, will come back with something worth every penny.
             </p>
             <Field label="Your name">
               <input className="oracle-input" value={name} onChange={e => setName(e.target.value)} placeholder="How should we address you?" />

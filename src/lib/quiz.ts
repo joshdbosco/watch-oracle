@@ -39,10 +39,10 @@ export const QUESTIONS: QuizQuestion[] = [
     h:    "Dream car. Money no object.",
     note: "Not what they drive. What they secretly want.",
     opts: [
-      { icon:"🏛",  label:"Classic — E-Type, old Porsche, vintage Merc", tags:["heritage","classic_soul"] },
-      { icon:"🔬", label:"Precise — Ferrari, new 911, M3",               tags:["precision","technical"]   },
-      { icon:"👁",  label:"Turns heads — Bentley, G-Wagon, Lambo",       tags:["presence","statement"]    },
-      { icon:"✓",  label:"Sensibly brilliant — Golf R, Tesla, Volvo",    tags:["understated","honest"]    },
+      { icon:"🏛",  label:"Classic — vintage cars, old Porsche, E-Type",  tags:["heritage","classic_soul"] },
+      { icon:"🔬", label:"Precise — Ferrari, 911, technical perfection",  tags:["precision","technical"]   },
+      { icon:"👁",  label:"Head-turning — G-Wagen, Land Rover, Lamborghini", tags:["presence","statement"] },
+      { icon:"✓",  label:"Sensibly brilliant — Golf, Tesla, Volvo",       tags:["understated","honest"]    },
     ],
   },
   {
